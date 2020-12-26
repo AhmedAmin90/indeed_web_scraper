@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'rainbow'
 
 class Scraper
-attr_accessor :all_jobs
+attr_reader :all_jobs
 
     def initialize
         @vacancies= ['front+end+developer', 'back+end+developer&' ,'full+sack+developer', 'ruby+developer', 'javascript+developer']
@@ -14,13 +14,12 @@ attr_accessor :all_jobs
     
     def scrapper(job_number, number_of_days , number_of_pages )
         looking_for = @vacancies[job_number-1]
-        date_posted = @posted_days [number_of_days-1]
-        number = number_of_days
+        date_posted = @posted_days[number_of_days-1]
         page_result = @page_number[number_of_pages-1]
-        if number == 5
+        if number_of_days == 5
          @url_date = "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote"
         else
-         @url_date = "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{number}#{page_result}"
+         @url_date = "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{date_posted}#{page_result}"
         end
         page = HTTParty.get(@url_date)
         scrapped_page = Nokogiri::HTML(page.body) #> body  avoid annoying msg in terminal (https://stackoverflow.com/questions/61590268/deprecation-httparty-will-no-longer-override-responsenil-what-does-this-de)
