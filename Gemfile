@@ -1,6 +1,6 @@
-source "https://rubygems.org/"
+source 'https://rubygems.org/'
 
 gem 'httparty'
 gem 'nokogiri'
-gem 'whirly'
 gem 'paint'
+gem 'whirly'
