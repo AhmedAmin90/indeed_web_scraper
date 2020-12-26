@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/MethodLength
 require 'httparty'
 require 'nokogiri'
 require 'rainbow'
@@ -26,15 +25,13 @@ class Scraper
                 else
                   "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{date_posted}#{page_result}"
                 end
-    page = HTTParty.get(@url_date)
-    scrapped_page = Nokogiri::HTML(page.body)
+    scrapped_page = Nokogiri::HTML(HTTParty.get(@url_date).body)
     job_cards = scrapped_page.css('div.jobsearch-SerpJobCard')
     job_cards.each do |vacancy|
-      rest_of_link = vacancy.css('a')[0].attributes['href'].value
       one_job = {
         title: vacancy.css('a.jobtitle').text,
         company: vacancy.css('span.company').text,
-        link: "https://www.indeed.com#{rest_of_link}",
+        link: "https://www.indeed.com#{vacancy.css('a')[0].attributes['href'].value}",
         date: vacancy.css('span.date').text
       }
       @all_jobs << one_job
@@ -46,5 +43,3 @@ class Scraper
     Rainbow("\nThe link of the page: \n").bold.underline + Rainbow("#{@url_date}\n").purple
   end
 end
-
-# rubocop: enable Metrics/MethodLength
