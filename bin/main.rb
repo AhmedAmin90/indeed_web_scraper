@@ -1,7 +1,11 @@
 require_relative '../lib/scraper'
 require 'rainbow'
+require 'whirly'
+require 'paint'
 
 search = Scraper.new
+
+
 puts Rainbow("Welcome To The Indeed Web Developer Remote Jobs Scraper!\n").gold
 puts Rainbow("How to use this scraper? \n").bold
 puts Rainbow("1- Select the job title that you are looking for. \n").red + 
@@ -47,10 +51,11 @@ until [1,2,3,4,5].include?(number_of_pages) == true
     number_of_pages =  gets.chomp.to_i
 end
 
-Whirly.start do
-    puts Rainbow("Please wait until getting the jobs for you , Think about your Future ! \n").
-    sleep 5
-  end
+puts 
+
+Whirly.configure(spinner: "dots", stop: "✔")
+Whirly.start status: "Processing" do
+   
 
 search.scrapper(job_number,number_of_days,number_of_pages)
 
@@ -71,3 +76,6 @@ search.all_jobs.each_with_index  do |(key , value) , index |
 end
 
 puts search.page_result
+
+end
+puts Rainbow("Done").gold.bold
