@@ -60,6 +60,8 @@ Whirly.start status: 'Processing' do
     job_company = Rainbow(search.all_jobs[index][:company]).blue
     job_date = Rainbow(search.all_jobs[index][:date]).green
     job_link = Rainbow(search.all_jobs[index][:link]).yellow
+
+    puts "\n______________________________________________________"
     puts Rainbow("\nThe job number: #{index + 1}\n").red
     puts Rainbow(
       'The vacancy is:'
@@ -70,6 +72,7 @@ Whirly.start status: 'Processing' do
     puts "The job is posted from #{job_date}"
     puts "The details of the Job is in this link:
 #{job_link}\n "
+    puts '______________________________________________________'
   end
 
   puts search.page_result
