@@ -46,8 +46,11 @@ until [1,2,3,4,5].include?(number_of_pages) == true
     puts Rainbow('please select number from the previous detected numbers').red.bold
     number_of_pages =  gets.chomp.to_i
 end
-puts Rainbow("Please wait until getting the jobs for you , Think about your Future ! \n").
-15.times { print '.'}
+
+Whirly.start do
+    puts Rainbow("Please wait until getting the jobs for you , Think about your Future ! \n").
+    sleep 5
+  end
 
 search.scrapper(job_number,number_of_days,number_of_pages)
 

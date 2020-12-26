@@ -1,5 +1,6 @@
 require 'httparty'
 require 'nokogiri'
+require 'rainbow'
 
 class Scraper
 attr_accessor :all_jobs
@@ -34,19 +35,9 @@ attr_accessor :all_jobs
             @all_jobs << one_job
         end
     end
-   
-    # def find_jobs
-    #     @all_jobs.each_with_index do |(key , value) , index |
-    #         job_title = @all_jobs[index][:title]
-    #         job_company = @all_jobs[index][:company]
-    #         job_date = @all_jobs[index][:date]
-    #         job_link = @all_jobs[index][:link]  
-    #         yield
-    #     end
-    # end
 
     def page_result
-        @url_date
+        return Rainbow("\nThe link of the page: \n").bold.underline + Rainbow("#{@url_date}\n").purple
     end
 
 end

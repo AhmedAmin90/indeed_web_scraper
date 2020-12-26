@@ -11,6 +11,10 @@ GEM
     multi_xml (0.6.0)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    paint (2.2.1)
+    unicode-display_width (1.7.0)
+    whirly (0.2.6)
+      unicode-display_width (~> 1.1)
 
 PLATFORMS
   x86_64-linux
@@ -18,6 +22,8 @@ PLATFORMS
 DEPENDENCIES
   httparty
   nokogiri
+  paint
+  whirly
 
 BUNDLED WITH
    2.2.2
