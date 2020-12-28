@@ -53,6 +53,7 @@ puts
 Whirly.configure(spinner: 'dots', stop: '✔')
 Whirly.start status: 'Processing' do
   search.scraper(job_number, number_of_days, number_of_pages)
+  search.make_array
 
   puts Rainbow("Here we are !\n").gold.bold
   search.all_jobs.each_with_index do |(_key, _value), index|
