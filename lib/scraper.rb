@@ -4,7 +4,7 @@ require 'rainbow'
 require 'csv'
 
 class Scraper
-  attr_accessor :all_jobs, :vacancies, :page_number, :posted_days, :url_date
+  attr_accessor :all_jobs
 
   def initialize
     @vacancies = ['front+end+developer',
@@ -15,23 +15,21 @@ class Scraper
     @page_number = ['', '&start=10', '&start=20', '&start=30', '&start=40']
     @posted_days = [1, 3, 7, 14, 'all']
     @all_jobs = []
-    @url_date = url_date
   end
 
   def scraper(job, days, pages)
-    looking_for = vacancies[job - 1]
-    date_posted = posted_days[days - 1]
-    page_result = page_number[pages - 1]
-    url_date = if days == 5
-                 "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote"
-               else
-                 "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{date_posted}#{page_result}"
-               end
-    self.url_date = url_date
+    looking_for = @vacancies[job - 1]
+    date_posted = @posted_days[days - 1]
+    page_result = @page_number[pages - 1]
+    @url_date = if days == 5
+                  "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote"
+                else
+                  "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{date_posted}#{page_result}"
+                end
   end
 
   def make_array
-    scrapped_page = Nokogiri::HTML(HTTParty.get(url_date).body)
+    scrapped_page = Nokogiri::HTML(HTTParty.get(@url_date).body)
     job_cards = scrapped_page.css('div.jobsearch-SerpJobCard')
     job_cards.each do |vacancy|
       one_job = {

@@ -29,8 +29,5 @@ describe Scraper do
     it 'Returns the links of the result page' do
       expect(start.page_result).to eql("\e[1m\e[4m\nThe link of the page: \n\e[0m\e[38;5;129m\n\e[0m")
     end
-
-    it 'Returns ' do
-    end
   end
 end
