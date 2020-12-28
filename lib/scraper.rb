@@ -44,6 +44,6 @@ class Scraper
   end
 
   def page_result
-    Rainbow("\nThe link of the page: \n").bold.underline + Rainbow("#{url_date}\n").purple
+    Rainbow("\nThe link of the page: \n").bold.underline + Rainbow("#{@url_date}\n").purple
   end
 end
