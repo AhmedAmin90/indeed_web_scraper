@@ -56,12 +56,16 @@ Whirly.start status: 'Processing' do
   search.make_array
 
   puts Rainbow("Here we are !\n").gold.bold
+  colored_arr = []
   search.all_jobs.each_with_index do |(_key, _value), index|
     job_title = Rainbow(search.all_jobs[index][:title]).green
     job_company = Rainbow(search.all_jobs[index][:company]).blue
     job_date = Rainbow(search.all_jobs[index][:date]).green
     job_link = Rainbow(search.all_jobs[index][:link]).yellow
-
+    colored_arr << "The job is #{search.all_jobs[index][:title]}"
+    colored_arr << "The company is #{search.all_jobs[index][:company]}"
+    colored_arr << "The date of job is #{search.all_jobs[index][:date]}"
+    colored_arr << "The link of the job details #{search.all_jobs[index][:link]}"
     puts "\n______________________________________________________"
     puts Rainbow("\nThe job number: #{index + 1}\n").red
     puts Rainbow(
@@ -74,6 +78,9 @@ Whirly.start status: 'Processing' do
     puts "The details of the Job is in this link:
 #{job_link}\n "
     puts '______________________________________________________'
+    CSV.open('data.csv', 'w') do |csv|
+      csv << colored_arr
+    end
   end
 
   puts search.page_result

@@ -1,6 +1,7 @@
 require 'httparty'
 require 'nokogiri'
 require 'rainbow'
+require 'csv'
 
 class Scraper
   attr_accessor :all_jobs, :vacancies, :page_number, :posted_days, :url_date
