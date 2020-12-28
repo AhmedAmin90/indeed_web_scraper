@@ -21,14 +21,10 @@
 ```
 git clone https://github.com/AhmedAmin90/indeed_web_scraper
 ```
-- Install required Gems:
+- Install required Gems from the Gemfile:
 
 ```
-gem install RSpec 
-gem install httparty 
-gem install nokogiri
-gem install rainbow
-gem install whirly 
+bundle install 
 ```
 - To run the application: Go to The bin folder and open the terminal and run it by:
 ```
@@ -67,6 +63,22 @@ gem install whirly
 
 
 ![screenshot](./imgs/end-of-the-list.png)
+
+## How to run tests:
+
+- Open the terminal in the main directory
+- Run:
+
+```
+rspec
+```
+
+![screenshot](./imgs/test-one.png)
+
+
+- wait for a while until getting the result
+
+![screenshot](./imgs/test-two.png)
 
 
 # Author:
