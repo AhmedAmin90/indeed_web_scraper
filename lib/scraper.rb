@@ -4,7 +4,7 @@ require 'rainbow'
 require 'csv'
 
 class Scraper
-  attr_accessor :all_jobs
+  attr_accessor :all_jobs, :vacancies, :page_number, :posted_days, :url_date
 
   def initialize
     @vacancies = ['front+end+developer',
@@ -15,17 +15,19 @@ class Scraper
     @page_number = ['', '&start=10', '&start=20', '&start=30', '&start=40']
     @posted_days = [1, 3, 7, 14, 'all']
     @all_jobs = []
+    @url_date = url_date
   end
 
   def scraper(job, days, pages)
-    looking_for = @vacancies[job - 1]
-    date_posted = @posted_days[days - 1]
-    page_result = @page_number[pages - 1]
-    @url_date = if days == 5
-                  "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote"
-                else
-                  "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{date_posted}#{page_result}"
-                end
+    looking_for = vacancies[job - 1]
+    date_posted = posted_days[days - 1]
+    page_result = page_number[pages - 1]
+    url_date = if days == 5
+                 "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote"
+               else
+                 "https://www.indeed.com/jobs?q=#{looking_for}&l=Remote&fromage=#{date_posted}#{page_result}"
+               end
+    self.url_date = url_date
   end
 
   def make_array
@@ -44,6 +46,6 @@ class Scraper
   end
 
   def page_result
-    Rainbow("\nThe link of the page: \n").bold.underline + Rainbow("#{@url_date}\n").purple
+    Rainbow("\nThe link of the page: \n").bold.underline + Rainbow("#{url_date}\n").purple
   end
 end
